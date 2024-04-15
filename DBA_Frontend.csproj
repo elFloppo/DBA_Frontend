@@ -35,8 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +60,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\DataToCSVConverter.cs" />
+    <Compile Include="Extensions\HttpClientExtensions.cs" />
+    <Compile Include="Models\DatabaseModels\Abonent.cs" />
+    <Compile Include="Models\DatabaseModels\Address.cs" />
+    <Compile Include="Models\DatabaseModels\PhoneNumber.cs" />
+    <Compile Include="Models\DatabaseModels\PhoneNumberType.cs" />
+    <Compile Include="Models\DatabaseModels\Street.cs" />
+    <Compile Include="Models\Enums\SortingFieldsEnum.cs" />
+    <Compile Include="Models\ViewModels\AbonentsOnStreetCountVM.cs" />
+    <Compile Include="Models\ViewModels\FoundByNumberAbonentVM.cs" />
+    <Compile Include="SaveCSVWindow.xaml.cs">
+      <DependentUpon>SaveCSVWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchByNumberWindow.xaml.cs">
+      <DependentUpon>SearchByNumberWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StreetsInfoWindow.xaml.cs">
+      <DependentUpon>StreetsInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Validators\Validator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,8 +92,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SaveCSVWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchByNumberWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StreetsInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ViewModels\AbonentVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

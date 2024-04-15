@@ -1,0 +1,15 @@
+﻿<Window x:Class="DBA_Frontend.SaveCSVWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBA_Frontend"
+        mc:Ignorable="d"
+        Title="Экспорт в CSV" ResizeMode="NoResize" Height="142" Width="405">
+    <Grid Margin="0,0,10,0">
+        <Label Content="Укажите путь для экспорта:" Margin="30,-3,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="168"/>
+        <TextBox x:Name="FileLocationTextBox" Margin="30,22,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255" TextChanged="FileLocationTextBox_TextChanged"/>
+        <Button x:Name="OpenFolderBrowserDialogBtn" Content="Обзор..." Margin="299,22,0,0" Click="OpenFolderBrowserDialogBtn_Click" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70"/>
+        <Button x:Name="SaveCSVBtn" Content="Сохранить CSV" Margin="100,63,0,0" IsEnabled="False" Click="SaveCSVBtn_Click" HorizontalAlignment="Left" Width="132" Height="28" VerticalAlignment="Top" Grid.Column="1"/>
+    </Grid>
+</Window>

@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBA_Frontend"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Абоненты" MinHeight="500" MinWidth="1300" Height="500" Width="1300" FontSize="15" >
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="189*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Height="408" Margin="-18,19,6,0" VerticalAlignment="Top">
+            <Label Content="Фильтры" HorizontalContentAlignment="Center" Margin="128,0,0,0" Height="33" VerticalAlignment="Top" FontSize="18"/>
+            <Label Content="ID" HorizontalContentAlignment="Right" Margin="42,52,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" FontSize="12"/>
+            <TextBox x:Name="IdFilterTextBox" TextAlignment="Center" Margin="131,54,4,0" Height="25" VerticalAlignment="Top" KeyDown="TextBoxes_KeyDown"/>
+            <Label Content="ФИО" HorizontalContentAlignment="Right" Margin="46,93,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" FontSize="12"/>
+            <TextBox x:Name="FullNameFilterTextBox" TextAlignment="Center" Margin="131,95,4,0" Height="25" VerticalAlignment="Top" KeyDown="TextBoxes_KeyDown"/>
+            <Label Content="Улица" HorizontalContentAlignment="Right" Margin="42,125,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" FontSize="12"/>
+            <TextBox x:Name="StreetFilterTextBox" TextAlignment="Center" Margin="131,130,4,0" Height="25" VerticalAlignment="Top" KeyDown="TextBoxes_KeyDown"/>
+            <Label Content="Номер дома" HorizontalContentAlignment="Right" Margin="27,165,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" FontSize="12"/>
+            <TextBox x:Name="BuildingNumberFilterTextBox" TextAlignment="Center" Margin="131,170,4,0" Height="25" VerticalAlignment="Top" KeyDown="TextBoxes_KeyDown"/>
+            <Label Content="Домашний тел." HorizontalContentAlignment="Right" Margin="12,211,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="110" FontSize="12"/>
+            <TextBox x:Name="HomePhoneNumberFilterTextBox" TextAlignment="Center" Margin="131,211,4,0" Height="25" VerticalAlignment="Top" KeyDown="TextBoxes_KeyDown"/>
+            <Label Content="Рабочий тел." HorizontalContentAlignment="Right" Margin="27,248,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95" FontSize="12"/>
+            <TextBox x:Name="WorkPhoneNumberFilterTextBox" TextAlignment="Center" Margin="131,250,4,0" Height="25" VerticalAlignment="Top" KeyDown="TextBoxes_KeyDown"/>
+            <Label Content="Мобильный тел." HorizontalContentAlignment="Right" Margin="0,287,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="122" FontSize="12"/>
+            <TextBox x:Name="MobilePhoneNumberFilterTextBox" TextAlignment="Center" Margin="131,292,3,0" Height="25" VerticalAlignment="Top" KeyDown="TextBoxes_KeyDown"/>
+            <Button x:Name="ApplyFiltersBtn" IsEnabled="False" Content="Применить" Margin="130,341,4,0" Click="ApplyFiltersBtn_Click" Height="26" VerticalAlignment="Top"/>
+            <Button x:Name="ResetFiltersBtn" IsEnabled="False" Content="Сбросить" Margin="146,388,18,0" Height="20" VerticalAlignment="Top" Click="ResetFiltersBtn_Click" FontSize="12"/>
+        </Grid>
+        <Button x:Name="SearchByNumberBtn" Margin="28,10,0,0" Content="Поиск по номеру" Click="SearchByNumberBtn_Click" Height="33" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Width="148"/>
+        <Button x:Name="GetCSVBtn" Margin="0,10,10,0" Content="Выгрузить CSV" Height="33" IsEnabled="False" VerticalAlignment="Top" Click="GetCSVBtn_Click" Grid.Column="1" HorizontalAlignment="Right" Width="164"/>
+        <Button x:Name="StreetsBtn" Margin="188,10,0,0" Content="Улицы" Height="33" VerticalAlignment="Top" Click="StreetsBtn_Click" Grid.Column="1" HorizontalAlignment="Left" Width="164"/>
+        <DataGrid  x:Name="AbonentsListDg" AutoGenerateColumns="False" CanUserAddRows="False" Margin="28,48,10,56" Loaded="DataGrid_Loaded" Sorting="AbonentsListDg_Sorting" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="ID" IsReadOnly="True" MinWidth="30" Width="30"/>
+                <DataGridTextColumn Binding="{Binding FullName}" Header="ФИО" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Street}" Header="Улица" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding BuildingNumber}" Header="Номер дома" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding HomePhoneNumber}" Header="Домашний тел." IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding WorkPhoneNumber}" Header="Рабочий тел." IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding MobilePhoneNumber}" Header="Мобильный тел." IsReadOnly="True" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="PrevPageBtn" Margin="165,0,0,6" Content="Назад" Click="PrevPageBtn_Click" IsEnabled="False" Height="43" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Left" Width="164"/>
+        <Label Content="Страница" HorizontalContentAlignment="Center" Margin="319,0,284,0" Grid.Column="1" Height="28" VerticalAlignment="Bottom" FontSize="12"/>
+        <TextBox x:Name="PageNumberTextBox" IsEnabled="False" Text="1" TextAlignment="Center" Margin="364,0,330,23" Height="26" VerticalAlignment="Bottom" PreviewTextInput="PageNumberAndSizeTextBoxes_PreviewTextInput" Grid.Column="1" KeyDown="PageNumberTextBox_KeyDown"/>
+        <Button x:Name="NextPageBtn" IsEnabled="False" Margin="0,0,129,6" Content="Далее" Click="NextPageBtn_Click" Height="43" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Right" Width="164"/>
+        <Label Content="Кол-во&#xA;записей" HorizontalContentAlignment="Right" Margin="0,0,50,6" Grid.Column="1" FontSize="10" HorizontalAlignment="Right" Width="51" Height="37" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="PageSizeTextBox" IsEnabled="False" Text="20" TextAlignment="Center" Margin="0,0,10,10" Height="26" VerticalAlignment="Bottom" PreviewTextInput="PageNumberAndSizeTextBoxes_PreviewTextInput" Grid.Column="1" HorizontalAlignment="Right" Width="35" KeyDown="PageSizeTextBox_KeyDown"/>
+        <ProgressBar x:Name="AbonentsLoadingPb" Visibility="Visible" IsIndeterminate="True" Grid.Column="1"  Margin="378,18,196,0" Height="17" VerticalAlignment="Top"/>
+        <TextBlock x:Name="DataLoadingFailedTextBlock" Visibility="Hidden" Text="Нет данных" TextAlignment="Center" Grid.Column="1" Margin="319,10,143,0" FontSize="20" Foreground="#FFB32F2F" Height="29" VerticalAlignment="Top"/>
+        <Button x:Name="UpdateBtn" Content="Обновить" IsEnabled="False" Margin="28,0,0,6" Grid.Column="1" HorizontalAlignment="Left" Width="110" Height="43" VerticalAlignment="Bottom" Click="UpdateBtn_Click"/>
     </Grid>
 </Window>
