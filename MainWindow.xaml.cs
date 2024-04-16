@@ -89,17 +89,19 @@ namespace DBA_Frontend
 
         private async Task SetAbonentsFromAPI()
         {
+            var getAbonentsTask = GetAbonentsFromAPI(_pageNumber, _pageSize);
+            var getAbonentsCountTask = GetAbonentsCountFromAPI();
             DataLoadingFailedTextBlock.Visibility = Visibility.Hidden;
             AbonentsLoadingPb.Visibility = Visibility.Visible;
 
-            var abonents = await GetAbonentsFromAPI(_pageNumber, _pageSize);
+            var abonents = await getAbonentsTask;
             _abonentsList.Clear();
 
             if (abonents != null)
                 foreach (var anonent in abonents)
                     _abonentsList.Add(anonent);
 
-            var totalAbonentsCount = await GetAbonentsCountFromAPI();
+            var totalAbonentsCount = await getAbonentsCountTask;
             PageNumberTextBox.Text = _pageNumber.ToString();
             NextPageBtn.IsEnabled = abonents != null && totalAbonentsCount > _pageNumber * _pageSize;
             PrevPageBtn.IsEnabled = abonents != null && _pageNumber > 1 && totalAbonentsCount > _pageSize;
