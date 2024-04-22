@@ -298,9 +298,7 @@ namespace DBA_Frontend
             if (data == null)
                 return;
 
-            var window = new SaveCSVWindow();
-            
-            window.abonents = data;
+            var window = new SaveCSVWindow(data);
 
             window.Owner = this;
             window.ShowDialog();
