@@ -63,6 +63,7 @@
     <Compile Include="Commands\SaveCSVCommands\SaveCSVCommand.cs" />
     <Compile Include="Commands\SaveCSVCommands\SelectFolderCommand.cs" />
     <Compile Include="Commands\SearchByNumberCommands\FindByNumberCommand.cs" />
+    <Compile Include="Commands\StreetsInfoCommands\UpdateListCommand.cs" />
     <Compile Include="Converters\DataToCSVConverter.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Models\DatabaseModels\Abonent.cs" />
@@ -71,10 +72,9 @@
     <Compile Include="Models\DatabaseModels\PhoneNumberType.cs" />
     <Compile Include="Models\DatabaseModels\Street.cs" />
     <Compile Include="Models\Enums\SortingFieldsEnum.cs" />
-    <Compile Include="Models\ViewModels\AbonentsOnStreetCountVM.cs" />
-    <Compile Include="Models\ViewModels\FoundByNumberAbonentVM.cs" />
     <Compile Include="Models\ViewModels\SaveCSVViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchByNumberViewModel.cs" />
+    <Compile Include="Models\ViewModels\StreetsInfoViewModel.cs" />
     <Compile Include="SaveCSVWindow.xaml.cs">
       <DependentUpon>SaveCSVWindow.xaml</DependentUpon>
     </Compile>
