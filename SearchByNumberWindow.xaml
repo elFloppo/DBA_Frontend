@@ -3,14 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DBA_Frontend"
+        xmlns:local="clr-namespace:DBA_Frontend" xmlns:viewmodels="clr-namespace:DBA_Frontend.Models.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SearchByNumberViewModel}"
         mc:Ignorable="d"
         Title="Поиск по номеру телефона" MinHeight="450" MinWidth="850" Height="450" Width="850">
     <Grid>
         <Label Content="Введите номер телефона:" Margin="0,18,200,0" HorizontalAlignment="Right" Width="157" Height="28" VerticalAlignment="Top"/>
-        <TextBox x:Name="FindByNumberTextBox" HorizontalContentAlignment="Center" Text="{Binding Value, StringFormat={}{0:(###)###-####}}" Margin="0,46,131,0" Height="23" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Right" Width="226"/>
-        <Button x:Name="FindByNumberBtn" Margin="0,46,44,0" Content="Найти" Click="FindByNumberBtn_Click" HorizontalAlignment="Right" Width="82" Height="23" VerticalAlignment="Top"/>
-        <DataGrid x:Name="FoundAbonentsListDg" CanUserAddRows="False" AutoGenerateColumns="False" Margin="10,86,10,31" Loaded="FoundAbonentsListDg_Loaded">
+        <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:(###)###-####}}" HorizontalContentAlignment="Center" Margin="0,46,131,0" Height="23" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Right" Width="226"/>
+        <Button Command="{Binding FindByNumberCommand}" Margin="0,46,44,0" Content="Найти" HorizontalAlignment="Right" Width="82" Height="23" VerticalAlignment="Top"/>
+        <DataGrid ItemsSource="{Binding AbonentsList}" CanUserAddRows="False" AutoGenerateColumns="False" Margin="10,86,10,31">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path = Id}" Header="ID" IsReadOnly="True" CanUserSort="False"/>
                 <DataGridTextColumn Binding="{Binding Path = FullName}" Header="ФИО" CanUserSort="False" IsReadOnly="True"/>
@@ -20,7 +20,7 @@
                 <DataGridTextColumn Binding="{Binding Path = BuildingNumber}" Header="Номер дома" Width="*" CanUserSort="False" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ProgressBar x:Name="SearchPb" IsIndeterminate="True" Visibility="Hidden" Margin="0,0,0,10" HorizontalAlignment="Center" Width="314" Height="16" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="DataLoadingFailedTextBlock" Visibility="Hidden"  Text="Нет данных" TextAlignment="Center" Margin="5,0,5,0" Foreground="#FFA72727" FontSize="16" Height="29" VerticalAlignment="Bottom"/>
+        <ProgressBar Visibility="{Binding SearchProgressBarVisibility}" IsIndeterminate="True" Margin="0,0,0,10" HorizontalAlignment="Center" Width="314" Height="16" VerticalAlignment="Bottom"/>
+        <TextBlock Visibility="{Binding DataLoadingFailedTextVisibility}" Text="Нет данных" TextAlignment="Center" Margin="5,0,5,0" Foreground="#FFA72727" FontSize="16" Height="29" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
